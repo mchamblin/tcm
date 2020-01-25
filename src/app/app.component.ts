@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'tcm-root',
   template: `
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <img src="assets/images/tcm-logo.png" alt="TCM logo" style="height: 50px">
+      <img [routerLink]="['/']" src="assets/images/tcm-logo.png" alt="TCM logo" style="height: 50px; cursor:pointer;">
       <div class="navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">

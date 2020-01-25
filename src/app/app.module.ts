@@ -8,9 +8,10 @@ import { TitleComponent } from 'src/app/title/title.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PersonListComponent } from './person-list/person-list.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
-  declarations: [AppComponent, PersonComponent, PersonListComponent, TitleComponent, TitleListComponent],
+  declarations: [AppComponent, PersonComponent, PersonListComponent, TitleComponent, TitleListComponent, HomepageComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
