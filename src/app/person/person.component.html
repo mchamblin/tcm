@@ -1,0 +1,118 @@
+<ng-container *ngIf="person$ | async as person">
+  <div class="dark short">
+    <div class="container">
+      <section class="row">
+        <div class="flex-column col-4">
+          <h1 class="serif underline">{{ person.name }}</h1>
+          <p>
+            <ng-container *ngFor="let job of person.professions; let isLast = last">
+              {{ job.detail | titlecase }}
+              <ng-container *ngIf="!isLast">,&nbsp;</ng-container>
+            </ng-container>
+          </p>
+        </div>
+        <div class="flex-column col-8">
+          <div class="img-hero" [style.background-image]="'url(' + person.image.url + ')'"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="container">
+    <section class="row">
+      <nav class="nav flex-column col-3">
+        <a class="nav-link" href="person/{{personId}}#about">Overview</a>
+        <a class="nav-link" href="person/{{personId}}#filmography">Filmography</a>
+        <a class="nav-link" href="person/{{personId}}#biography">Biography</a>
+        <a class="nav-link" href="person/{{personId}}#media">Photos & Videos</a>
+        <a *ngIf="person.family.length || person.companions.length"  class="nav-link" href="person/{{personId}}#family">Family & Companions</a>
+        <a *ngIf="person.bibliography.length" class="nav-link" href="person/{{personId}}#bibliography">Bibliography</a>
+        <a *ngIf="person.notes.length" class="nav-link" href="person/{{personId}}#notes">Notes</a>
+      </nav>
+      <main class="col-9">
+
+        <div id="about">
+          <h2 class="serif underline first">About</h2>
+          <table class="table table-borderless">
+            <tr>
+              <th scope="row">Also Known As</th>
+              <td>{{ person.akaNames }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Birth Place</th>
+              <td>{{ person.placeOfBirth }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Born</th>
+              <td>{{ person.dateOfBirth | date }}</td>
+            </tr>
+            <tr *ngIf="person.dateOfDeath !== ''">
+              <th scope="row">Died</th>
+              <td>{{ person.dateOfDeath | date }}</td>
+            </tr>
+            <tr *ngIf="person.causeOfDeath !== ''">
+              <th scope="row">Cause of Death</th>
+              <td>{{ person.causeOfDeath | titlecase }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="biography">
+          <h2 class="serif underline">Biography</h2>
+          <p [innerHTML]="person.biographyHtml | slice:0:300"></p>
+        </div>
+
+        <div id="filmography">
+          <h2 class="serif underline">Filmography</h2>
+          <div class="row">
+            <ng-container *ngFor="let film of person.filmographySorted">
+              <div class="col-4 margin-bottom-parent-only">
+                <p class="serif font-weight-bold">{{ film.name }} ({{film.releaseYear}})</p>
+                <p *ngIf="film.roleName === 'ACTOR' && film.characterName !== ''" class="role small">
+                  as {{film.characterName}}</p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div id="media">
+          <h2 class="serif underline">Photos
+            <ng-container *ngIf="person.videos.length"> & Videos</ng-container>
+          </h2>
+          <div class="row">
+            <img class="col-12" src="{{person.masonaryArray[2].images[0].url}}" style="height: 100%">
+          </div>
+        </div>
+
+        <div *ngIf="person.family.length || person.companions.length" id="family">
+          <h2 class="serif underline">Family & Companions</h2>
+          <div class="row">
+            <div class="margin-bottom-parent-only col-6" *ngFor="let relative of person.family">
+              <p class="font-weight-bold">{{relative.name}}</p>
+              <p>{{relative.relationship}}</p>
+              <p class="small">{{relative.note}}</p>
+            </div>
+            <div class="margin-bottom-parent-only col-6" *ngFor="let relative of person.companions">
+              <p class="font-weight-bold">{{relative?.name}}</p>
+              <p>{{relative?.relationship}}</p>
+              <p class="small">{{relative?.note}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="person.bibliography.length" id="bibliography">
+          <h2 class="serif underline">Bibliography</h2>
+          <div class="margin-bottom-parent-only" *ngFor="let title of person.bibliography">
+            <p class="font-weight-bold">{{title?.title}}</p>
+            <p class="small">{{title?.publisher}}</p>
+          </div>
+        </div>
+
+        <div *ngIf="person.notes.length" id="notes">
+          <h2 class="serif underline">Notes</h2>
+          <p [innerHTML]="person?.notes"></p>
+        </div>
+
+      </main>
+    </section>
+  </div>
+</ng-container>

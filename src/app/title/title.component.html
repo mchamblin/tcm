@@ -1,0 +1,137 @@
+<ng-container *ngIf="title$ | async as title">
+  <div class="dark short">
+    <div class="container">
+      <section class="row">
+        <div class="flex-column col-4">
+          <h1 class="serif underline">{{ title.name }}</h1>
+          <p class="small">
+            <span>{{title.runtimeHours}}</span> | <span>{{title.releaseYear}}</span> | <span>{{title.mpaaRating}}</span>
+          </p>
+        </div>
+        <div class="flex-column col-8">
+          <div class="img-hero" [style.background-image]="'url(' + title.profileImageUrl + ')'"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class="container">
+    <section class="row">
+      <nav class="nav flex-column col-3">
+        <a class="nav-link" href="#biography">Overview</a>
+        <a class="nav-link" href="#filmography">Filmography</a>
+        <a class="nav-link" href="#">Life Events</a>
+        <a class="nav-link" href="#">Biography</a>
+        <a class="nav-link" href="#">Photos & Videos</a>
+        <a class="nav-link" href="#">Family & Companions</a>
+        <a class="nav-link" href="#">Bibliography</a>
+        <a class="nav-link" href="#">Notes</a>
+      </nav>
+      <main class="col-9">
+
+        <div id="synopsis">
+          <h2 class="serif underline first">Synopsis</h2>
+          <!--          <p><span [innerHTML]="title.synopsis | slice:0:300"></span>...</p>-->
+          <p><span [innerHTML]="title.description"></span></p>
+        </div>
+
+        <div id="credits">
+          <h2 class="serif underline">Cast & Crew</h2>
+          <div class="row">
+            <ng-container *ngFor="let person of title.credits">
+              <div *ngIf="person.roleName === 'DIRECTOR'" class="col-4 margin-bottom-parent-only">
+                <p class="serif font-weight-bold">{{ person.name }}</p>
+                <p class="role small">{{person.roleName | titlecase}}</p>
+              </div>
+            </ng-container>
+            <ng-container *ngFor="let person of (title.credits | slice: 0:5)">
+              <div *ngIf="person.roleName !== 'Director'" class="col-4 margin-bottom-parent-only">
+                <p class="serif font-weight-bold">{{ person.name }}</p>
+                <p *ngIf="person.roleName === 'ACTOR' && person.characterName !== ''" class="role small">
+                  as {{person.characterName}}</p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div id="media">
+          <h2 class="serif underline">Photos
+            <ng-container *ngIf="title.videos.length"> & Videos</ng-container>
+          </h2>
+          <div class="row" style="justify-content: center">
+            <ng-container *ngFor="let image of (title.archives[1]?.images | slice:0:5)">
+              <div class="img-thumbnail col-4" [style.background-image]="'url(' + image.url + ')'"></div>
+            </ng-container>
+          </div>
+        </div>
+
+        <div id="details">
+          <h2 class="serif underline ">Film Details</h2>
+          <table class="table table-borderless">
+            <tr>
+              <th scope="row">MPAA Rating</th>
+              <td>{{title.mpaaRating}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Genre</th>
+              <td>
+                <div class="row">
+                  <ng-container *ngFor="let genre of title.genres">
+                    <div class="col-4">{{genre}}</div>
+                  </ng-container>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">Release Date</th>
+              <td>{{title.releaseYear}}</td>
+            </tr>
+            <tr *ngIf="title.productionData.premier">
+              <th scope="row">Premiere Information</th>
+              <td>{{title.productionData?.premier}}</td>
+            </tr>
+            <tr *ngIf="title.productionData.productionCompanies">
+              <th scope="row">Production Company</th>
+              <td>{{title.productionData?.productionCompanies}}</td>
+            </tr>
+            <tr *ngIf="title.productionData.distributors">
+              <th scope="row">Distribution Company</th>
+              <td>{{title.productionData?.distributors[0]}}</td>
+            </tr>
+            <tr *ngIf="title.country !== ''">
+              <th scope="row">Country</th>
+              <td>{{title.country}}</td>
+            </tr>
+            <tr *ngIf="title.sources.length && title.sources[0]['Text']">
+              <th scope="row">Screenplay Information</th>
+              <td><span [innerHTML]="title.sources[0]['Text']"></span></td>
+            </tr>
+          </table>
+        </div>
+
+        <div id="specs">
+          <h2 class="serif underline ">Technical Specs</h2>
+          <table class="table table-borderless">
+            <tr *ngIf="title.runtimeHours">
+              <th scope="row">Duration</th>
+              <td>{{title.runtimeHours}}</td>
+            </tr>
+            <tr *ngIf="title.sound">
+              <th scope="row">Sound</th>
+              <td>{{title.sound}}</td>
+            </tr>
+            <tr *ngIf="title.color">
+              <th scope="row">Color</th>
+              <td>{{title.color}}</td>
+            </tr>
+            <tr *ngIf="title.filmLength">
+              <th scope="row">Film Length</th>
+              <td>{{title.filmLength}}m</td>
+            </tr>
+
+          </table>
+        </div>
+
+      </main>
+    </section>
+  </div>
+</ng-container>

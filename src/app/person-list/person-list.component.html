@@ -1,0 +1,13 @@
+<div class="container" style="padding-top: 40px">
+  <section class="row" style="justify-content: center">
+    <div *ngFor="let person of participants" class="card" style="width: 18rem; margin: 10px">
+      <img src="{{person.img}}" class="card-img-top" >
+      <div class="card-body">
+        <h4 class="card-title">{{person.name}}</h4>
+        <p class="card-text">{{person.description}}</p>
+        <a [routerLink]="['/person/' + person.id]" class="btn btn-primary">View Profile</a>
+      </div>
+    </div>
+  </section>
+</div>
+

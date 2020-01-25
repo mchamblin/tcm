@@ -1,0 +1,13 @@
+<div class="container" style="padding-top: 40px">
+  <section class="row" style="justify-content: center">
+    <div *ngFor="let title of titles" class="card" style="width: 18rem; margin: 10px">
+      <img src="{{title.img}}" class="card-img-top" >
+      <div class="card-body">
+        <h4 class="card-title">{{title.name}}</h4>
+        <p class="card-text">{{title.description}}</p>
+        <a [routerLink]="['/title/' + title.id]" class="btn btn-primary">View Profile</a>
+      </div>
+    </div>
+  </section>
+</div>
+
