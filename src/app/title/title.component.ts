@@ -37,4 +37,9 @@ export class TitleComponent implements OnInit {
   getTitle(): Promise<any> {
     return this.http.get('https://dev-tcmws.tcm.com/tcmws/titles/' + this.titleId, {}).toPromise();
   }
+  getFilmLength(lengthInMeters) {
+    let num = lengthInMeters.replace(',', '');
+    num = +num;
+    return (num * 3.28084).toFixed(0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 }

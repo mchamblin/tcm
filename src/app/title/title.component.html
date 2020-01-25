@@ -121,9 +121,13 @@
               <th scope="row">Color</th>
               <td>{{title.color}}</td>
             </tr>
+            <tr *ngIf="title.aspectRatio">
+              <th scope="row">Aspect Ratio</th>
+              <td>{{title.aspectRatio}}</td>
+            </tr>
             <tr *ngIf="title.filmLength">
               <th scope="row">Film Length</th>
-              <td>{{title.filmLength}}m</td>
+              <td>{{getFilmLength(title.filmLength)}} feet</td>
             </tr>
 
           </table>

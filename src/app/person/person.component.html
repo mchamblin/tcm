@@ -67,7 +67,7 @@
             <ng-container *ngFor="let film of person.filmographySorted">
               <div class="col-4 margin-bottom-parent-only">
                 <p class="serif font-weight-bold">{{ film.name }} ({{film.releaseYear}})</p>
-                <p *ngIf="film.roleName === 'ACTOR' && film.characterName && film.characterName !== ''" class="role small">
+                <p *ngIf="film.roleName === 'ACTOR' && film.characterName && film.characterName !== '' && film.characterName !== ' '" class="role small">
                   as {{film.characterName}}</p>
               </div>
             </ng-container>
