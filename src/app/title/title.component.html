@@ -17,20 +17,18 @@
   <div class="container">
     <section class="row">
       <nav class="nav flex-column col-3">
-        <a class="nav-link" href="#biography">Overview</a>
-        <a class="nav-link" href="#filmography">Filmography</a>
-        <a class="nav-link" href="#">Life Events</a>
-        <a class="nav-link" href="#">Biography</a>
-        <a class="nav-link" href="#">Photos & Videos</a>
-        <a class="nav-link" href="#">Family & Companions</a>
-        <a class="nav-link" href="#">Bibliography</a>
-        <a class="nav-link" href="#">Notes</a>
+        <a class="nav-link" href="title/{{titleId}}#synopsis">Overview</a>
+        <a class="nav-link" href="title/{{titleId}}#synopsis">Synopsis</a>
+        <a class="nav-link" href="title/{{titleId}}#credits">Credits</a>
+        <a class="nav-link" href="title/{{titleId}}#media">Photos & Videos</a>
+        <a class="nav-link" href="title/{{titleId}}#details">Film Details</a>
+        <a class="nav-link" href="title/{{titleId}}#specs">Technical Specs</a>
+
       </nav>
       <main class="col-9">
 
         <div id="synopsis">
-          <h2 class="serif underline first">Synopsis</h2>
-          <!--          <p><span [innerHTML]="title.synopsis | slice:0:300"></span>...</p>-->
+          <h2 class="serif underline first">Brief Synopsis</h2>
           <p><span [innerHTML]="title.description"></span></p>
         </div>
 
