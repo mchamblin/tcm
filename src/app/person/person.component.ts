@@ -34,6 +34,6 @@ export class PersonComponent implements OnInit {
   }
 
   getPerson(): Promise<any> {
-    return this.http.get('http://dev-tcmws.tcm.com/tcmws/participants/' + this.personId, {}).toPromise();
+    return this.http.get('https://dev-tcmws.tcm.com/tcmws/participants/' + this.personId, {}).toPromise();
   }
 }

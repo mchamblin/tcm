@@ -35,6 +35,6 @@ export class TitleComponent implements OnInit {
   }
 
   getTitle(): Promise<any> {
-    return this.http.get('http://dev-tcmws.tcm.com/tcmws/titles/' + this.titleId, {}).toPromise();
+    return this.http.get('https://dev-tcmws.tcm.com/tcmws/titles/' + this.titleId, {}).toPromise();
   }
 }
