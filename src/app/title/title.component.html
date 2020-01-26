@@ -20,7 +20,7 @@
         <a class="nav-link" href="title/{{titleId}}#synopsis">Overview</a>
         <a class="nav-link" href="title/{{titleId}}#synopsis">Synopsis</a>
         <a class="nav-link" href="title/{{titleId}}#credits">Credits</a>
-        <a class="nav-link" href="title/{{titleId}}#media">Photos & Videos</a>
+        <a *ngIf="title.archives.length" class="nav-link" href="title/{{titleId}}#media">Photos & Videos</a>
         <a class="nav-link" href="title/{{titleId}}#details">Film Details</a>
         <a class="nav-link" href="title/{{titleId}}#specs">Technical Specs</a>
 
@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <div id="media">
+        <div *ngIf="title.archives.length" id="media">
           <h2 class="serif underline">Photos
             <ng-container *ngIf="title.videos.length"> & Videos</ng-container>
           </h2>
