@@ -46,7 +46,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
+              "src/styles.scss"
             ],
             "scripts": [],
             "es5BrowserSupport": true
@@ -122,6 +122,12 @@
             "exclude": [
               "**/node_modules/**"
             ]
+          }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/test/"
           }
         }
       }
